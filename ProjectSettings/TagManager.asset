@@ -8,6 +8,7 @@ TagManager:
   - Prev Portal
   - Enter Door
   - Exit Door
+  - Main Item
   layers:
   - Default
   - TransparentFX

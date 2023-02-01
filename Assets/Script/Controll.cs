@@ -10,6 +10,12 @@ public class Controll : MonoBehaviour
     public Camera MainCamera;
     public GameObject Ghost;
     public bool GhostSight = false;
+    
+    
+    public bool LastRoomHint = false;
+    public bool MainItemHint = false;
+    public bool ClassRoomHint = false;
+
     public static Controll instance;
     void Start()
     {
@@ -44,7 +50,7 @@ public class Controll : MonoBehaviour
 
         if (Input.GetAxisRaw("Horizontal") < 0)
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            transform.localScale = new Vector3(-2.3f,1.7f , 1);
             MoveDirection = new Vector3
                 (
                 -1,
@@ -54,7 +60,7 @@ public class Controll : MonoBehaviour
         }
         else if (Input.GetAxisRaw("Horizontal") > 0)
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.localScale = new Vector3(2.3f, 1.7f, 1);
             MoveDirection = new Vector3
                 (
                 1,
@@ -82,33 +88,28 @@ public class Controll : MonoBehaviour
     {
         if (collision.CompareTag("Next Portal"))
         {
-            transform.position = new Vector3(-88, transform.position.y, 0);
+            transform.position = new Vector3(-112, transform.position.y, 0);
         }
 
         else if (collision.CompareTag("Prev Portal"))
         {
-            transform.position = new Vector3(92, transform.position.y, 0);
+            transform.position = new Vector3(60, transform.position.y, 0);
         }
 
-        else if (collision.CompareTag("Enter Door"))
+       else if(collision.CompareTag("Main Item"))
         {
-            transform.position = new Vector3
-                (
-                transform.position.x,
-                transform.position.y + 28,
-                0
-                );
-            
+            if (MainItemHint)
+                Debug.Log("휠체어 획득");
+            else
+                Debug.Log("아직 휠체어를 가져갈 수 없습니다.");
         }
 
-        else if (collision.CompareTag("Exit Door"))
+        else if(collision.CompareTag("Finish"))
         {
-            transform.position = new Vector3
-                           (
-                           transform.position.x,
-                           transform.position.y - 28,
-                           0
-                           );
+            if (LastRoomHint)
+                Debug.Log("문열기");
+            else
+                Debug.Log("비밀번호가 필요합니다.");
         }
     }
 }

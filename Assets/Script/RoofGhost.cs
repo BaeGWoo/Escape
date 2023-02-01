@@ -5,7 +5,7 @@ using UnityEngine;
 public class RoofGhost : MonoBehaviour
 {
     public Animator anim;
-    private float speed = 5.0f;
+    private float speed = 15.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +24,6 @@ public class RoofGhost : MonoBehaviour
     {
         if (collision.CompareTag("Next Portal"))
         {
-            Debug.Log("충돌");
             transform.position = new Vector3(-88, transform.position.y, 0);
         }
     }
